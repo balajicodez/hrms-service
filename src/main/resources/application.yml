@@ -11,6 +11,9 @@ spring:
     defer-datasource-initialization: true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver  # Override in dev if needed
+  data:
+    rest:
+      base-path: /simplerp/api/
   sql:
     init:
       mode: always
