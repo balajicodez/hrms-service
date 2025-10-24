@@ -17,11 +17,4 @@ public class HolidayCalendar {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    private LocalDate date;
-
-    private String region; // Optional: could be used for location-specific holidays
-
-    private String description;
 }

@@ -1,9 +1,9 @@
 package com.simplerp.hrms.entity;
 
-import com.simplerp.hrms.enumeration.ExpenseSubTypeEnum;
-import com.simplerp.hrms.enumeration.ExpenseTypeEnum;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import lombok.Data;
 
 @Entity
@@ -16,11 +16,9 @@ public class ExpenseTypeMaster {
 
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private ExpenseTypeEnum type;
+    private String type;
 
-    @Enumerated(EnumType.STRING)
-    private ExpenseSubTypeEnum subtype;
+    private String subtype;
 
 }
 

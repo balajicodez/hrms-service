@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Date;
+
 @Entity
 @Data
 public class Expense {
@@ -18,8 +20,14 @@ public class Expense {
 
     private Long employeeId;
 
-    @ManyToOne
-    @JoinColumn(name = "expense_type")
-    private ExpenseTypeMaster expenseType;
+    private Date createdDate;
+
+    private String createdByUser;
+
+    private String createdByUserId;
+
+    private String expenseType;
+
+    private String expenseSubType;
 }
 
