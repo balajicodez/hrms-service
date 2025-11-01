@@ -1,9 +1,6 @@
 package com.simplerp.hrms.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.sql.Date;
@@ -18,11 +15,15 @@ public class Expense {
 
     private String description;
 
+    private String referenceNumber;
+
     private Long amount;
 
     private Long employeeId;
 
     private Date createdDate;
+
+    private Date transactionDate;
 
     private String createdByUser;
 
@@ -31,5 +32,17 @@ public class Expense {
     private String expenseType;
 
     private String expenseSubType;
+
+    // Binary image data (stored as BLOB)
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    @Column(name = "image_data", columnDefinition = "BLOB")
+    private byte[] imageData;
+
+    // Original file name
+    private String imageFileName;
+
+    // MIME type (e.g. image/png)
+    private String imageContentType;
 }
 

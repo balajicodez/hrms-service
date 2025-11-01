@@ -20,7 +20,7 @@ public class PettyCashDayClosingController {
 
     @PostMapping
     public ResponseEntity<PettyCashDayClosing> createFromExpenses(@RequestBody PettyCashDayClosingRequest request) {
-        PettyCashDayClosing saved = service.createFromExpenses(request.getClosingDate(), request.getCreatedUserId());
+        PettyCashDayClosing saved = service.createFromExpenses(request);
         return new ResponseEntity<>(saved, HttpStatus.CREATED);
     }
 

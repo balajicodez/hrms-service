@@ -21,9 +21,34 @@ public class PettyCashDayClosing {
 
     private Date createdTime;
 
+    private Long startingBalance;
+
+    private Long closingBalance;
+
+    private Long _10NoteCount;
+    private Long _20NoteCount;
+    private Long _50NoteCount;
+    private Long _100NoteCount;
+    private Long _200NoteCount;
+    private Long _500NoteCount;
+
+    private Long _10SoiledNoteCount;
+    private Long _20SoiledNoteCount;
+    private Long _50SoiledNoteCount;
+    private Long _100SoiledNoteCount;
+    private Long _200SoiledNoteCount;
+    private Long _500SoiledNoteCount;
+
+    private Long _1CoinCount;
+    private Long _5CoinCount;
+    private Long _10CoinCount;
+    private Long _20CoinCount;
+
+
     private Long cashIn;
 
     private Long cashOut;
 
 }
+
 

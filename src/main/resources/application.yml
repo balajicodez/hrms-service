@@ -3,7 +3,7 @@ spring:
     active: dev   # Default to 'dev' ? override this in prod
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
