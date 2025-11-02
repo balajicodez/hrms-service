@@ -25,7 +25,7 @@ public class SecurityConfig {
         return authenticationConfiguration.getAuthenticationManager();
     }
 
-    @Bean
+/*    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
@@ -34,10 +34,22 @@ public class SecurityConfig {
                         .anyRequest().authenticated()
                 );
         return http.build();
-    }
+    }*/
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())              // disable CSRF for simplicity
+                .authorizeHttpRequests(auth -> auth
+                        .anyRequest().permitAll()          // allow all requests
+                )
+                .formLogin(form -> form.disable())         // disable login form
+                .httpBasic(basic -> basic.disable());      // disable basic auth
+
+        return http.build();
     }
 }
