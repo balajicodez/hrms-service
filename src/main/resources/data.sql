@@ -1,38 +1,54 @@
--- Supervisor
-INSERT INTO EMPLOYEE ( name, skill, region, age, is_migrant_worker, supervisor_id)
-VALUES ( 'Rakesh Bhattacharya', 'Supervisor', 'Dhaka', 45, false, NULL);
+-- =========================================================
+--  ORGANIZATION
+-- =========================================================
+CREATE TABLE IF NOT EXISTS organization (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
 
--- Workers
-INSERT INTO EMPLOYEE (name, skill, region, age, is_migrant_worker, supervisor_id)
+-- =========================================================
+--  MASTER_ENTITY
+-- =========================================================
+CREATE TABLE IF NOT EXISTS master_entity (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255)
+);
+
+-- =========================================================
+--  EMPLOYEE
+-- =========================================================
+CREATE TABLE IF NOT EXISTS employee (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    organization_id BIGINT,
+    employee_no VARCHAR(255) UNIQUE NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255),
+    middle_name VARCHAR(255),
+    other_info TEXT,
+    employment_type_id BIGINT,
+    status_id BIGINT,
+    CONSTRAINT fk_org FOREIGN KEY (organization_id) REFERENCES organization(id),
+    CONSTRAINT fk_emp_type FOREIGN KEY (employment_type_id) REFERENCES master_entity(id),
+    CONSTRAINT fk_status FOREIGN KEY (status_id) REFERENCES master_entity(id)
+);
+
+-- =========================================================
+--  DATA SEEDING
+-- =========================================================
+
+INSERT INTO organization (id, name) VALUES
+(1, 'SimplERP'),
+(2, 'HR Solutions Ltd');
+
+INSERT INTO master_entity (id, name) VALUES
+(1, 'Full-time'),
+(2, 'Part-time'),
+(3, 'Active'),
+(4, 'Inactive');
+
+INSERT INTO employee (organization_id, employee_no, first_name, last_name, middle_name, other_info, employment_type_id, status_id)
 VALUES
-('Rohit Das', 'Stitching', 'Dhaka', 28, true, 1),
-('Shyam Ganguly', 'Embroidery', 'Dhaka', 38, true, 1),
-('Hiren Patel', 'Stitching', 'Surat', 32, true, NULL),
-('Sunita Kumari', 'Packing', 'Kolkata', 25, true, NULL);
-
--- Inserting expense type master records
---INSERT INTO expense_type_master (id, description, type, subtype)
---VALUES (1, 'Travel to Branch', 'CASH_IN', 'TRAVEL');
---
---INSERT INTO expense_type_master (id, description, type, subtype)
---VALUES (2, 'Visit from other branch', 'CASH_IN', 'TRAVEL');
---
---INSERT INTO expense_type_master (id, description, type, subtype)
---VALUES (3, 'Lunch expenses', 'CASH_OUT', 'REFRESHMENTS');
---
---INSERT INTO expense_type_master (id, description, type, subtype)
---VALUES (4, 'Dinner expenses', 'CASH_OUT', 'REFRESHMENTS');
-
-
--- Inserting expense records referencing expense_type_master
---INSERT INTO expense (id, description, amount, employee_id, expense_type)
---VALUES (1, 'Team lunch', 2500, 101, 3);
---
---INSERT INTO expense (id, description, amount, employee_id, expense_type)
---VALUES (2, 'Client dinner', 4000, 102, 4);
---
---INSERT INTO expense (id, description, amount, employee_id, expense_type)
---VALUES (3, 'Trip to Adilabad', 15000, 103, 1);
---
---INSERT INTO expense (id, description, amount, employee_id, expense_type)
---VALUES (4, 'Visit by Manager of other Branch', 85000, 104, 2);
+(1, 'EMP001', 'Rakesh', 'Bhattacharya', NULL, '{"designation":"Supervisor","region":"Dhaka"}', 1, 3),
+(1, 'EMP002', 'Priya', 'Sharma', NULL, '{"designation":"Worker","region":"Delhi"}', 1, 3),
+(2, 'EMP003', 'Arjun', 'Patel', 'Kumar', '{"designation":"Worker","region":"Gujarat"}', 2, 4),
+(2, 'EMP004', 'Meena', 'Das', NULL, '{"designation":"Worker","region":"Kolkata"}', 1, 3);

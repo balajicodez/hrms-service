@@ -1,45 +1,55 @@
 package com.simplerp.hrms.controller;
 
 import com.simplerp.hrms.entity.Employee;
-import com.simplerp.hrms.repository.EmployeeRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.rest.webmvc.RepositoryRestController;
+import com.simplerp.hrms.service.EmployeeService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-@RepositoryRestController
-@AllArgsConstructor
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@RequestMapping("/api/employees")
+@RequiredArgsConstructor
 public class EmployeeController {
 
-    private final EmployeeRepository employeeRepository;
+    private final EmployeeService employeeService;
 
-    @GetMapping("/search/supervisorId")
-    public ResponseEntity<Page<Employee>> getBySupervisor(
-            @RequestParam("supervisorId") Long employeeId,
-            Pageable pageable
-    ) {
-        Page<Employee> page = employeeRepository.findBySupervisorId(employeeId, pageable);
-        return ResponseEntity.ok(page);
+    @GetMapping
+    public ResponseEntity<List<Employee>> getAllEmployees() {
+        return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
-    @GetMapping("/search/byRegion")
-    public ResponseEntity<Page<Employee>> getByRegion(
-            @RequestParam("region") String region,
-            Pageable pageable
-    ) {
-        Page<Employee> page = employeeRepository.findByRegionIgnoreCase(region, pageable);
-        return ResponseEntity.ok(page);
+    @GetMapping("/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
+        return ResponseEntity.ok(employeeService.getEmployeeById(id));
     }
 
-    @GetMapping("/search/bySkill")
-    public ResponseEntity<Page<Employee>> getBySkill(
-            @RequestParam("skill") String skill,
-            Pageable pageable
-    ) {
-        Page<Employee> page = employeeRepository.findBySkillIgnoreCase(skill, pageable);
-        return ResponseEntity.ok(page);
+    @GetMapping("/empNo/{employeeNo}")
+    public ResponseEntity<Employee> getEmployeeByEmployeeNo(@PathVariable String employeeNo) {
+        return ResponseEntity.ok(employeeService.getEmployeeByEmployeeNo(employeeNo));
+    }
+
+    @PostMapping
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        return ResponseEntity.ok(employeeService.createEmployee(employee));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee) {
+        return ResponseEntity.ok(employeeService.updateEmployee(id, updatedEmployee));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEmployee(@PathVariable Long id) {
+        employeeService.deleteEmployee(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    // Update only 'otherInfo' JSON map
+    @PatchMapping("/{id}/other-info")
+    public ResponseEntity<Employee> updateOtherInfo(@PathVariable Long id, @RequestBody Map<String, String> otherInfo) {
+        return ResponseEntity.ok(employeeService.updateEmployeeOtherInfo(id, otherInfo));
     }
 }

@@ -1,7 +1,9 @@
 package com.simplerp.hrms.entity;
 
+import com.simplerp.hrms.service.JpaJsonConverter;
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.Map;
 
 @Entity
 @Data
@@ -11,91 +13,34 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-
-    private String skill;
-
-    private String region;
-
-    private int age;
-
-    @Column(name = "is_migrant_worker")
-    private boolean migrantWorker;
-
-    // Self-referencing relationship
     @ManyToOne
-    @JoinColumn(name = "supervisor_id")
-    private Employee supervisor;
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 
-    // Constructors
+    @Column(unique = true, nullable = false)
+    private String employeeNo;
+
+    @Column(nullable = false)
+    private String firstName;
+
+    private String lastName;
+
+    private String middleName;
+
+    @Lob
+    @Convert(converter = JpaJsonConverter.class)
+    @Column(columnDefinition = "TEXT")
+    private Map<String, String> otherInfo;
+
+    // ✅ these must be mapped as relationships (NOT columns)
+    @ManyToOne
+    @JoinColumn(name = "employment_type_id")
+    private MasterEntity employmentType;
+
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private MasterEntity status;
+
     public Employee() {
     }
-
-    public Employee(String name, String skill, String region, int age, boolean migrantWorker, Employee supervisor) {
-        this.name = name;
-        this.skill = skill;
-        this.region = region;
-        this.age = age;
-        this.migrantWorker = migrantWorker;
-        this.supervisor = supervisor;
-    }
-
-    // Getters and setters
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSkill() {
-        return skill;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public boolean isMigrantWorker() {
-        return migrantWorker;
-    }
-
-    public Employee getSupervisor() {
-        return supervisor;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setSkill(String skill) {
-        this.skill = skill;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setMigrantWorker(boolean migrantWorker) {
-        this.migrantWorker = migrantWorker;
-    }
-
-    public void setSupervisor(Employee supervisor) {
-        this.supervisor = supervisor;
-    }
 }
-
