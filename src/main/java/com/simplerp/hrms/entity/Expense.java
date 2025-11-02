@@ -33,6 +33,10 @@ public class Expense {
 
     private String expenseSubType;
 
+    private String branch;
+
+    private Long branchId;
+
     // Binary image data (stored as BLOB)
     @Lob
     @Basic(fetch = FetchType.LAZY)
