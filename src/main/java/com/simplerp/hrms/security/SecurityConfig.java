@@ -49,7 +49,7 @@ public class SecurityConfig {
                         
                 )
                 .csrf(csrf -> csrf
-                        .ignoringRequestMatchers("/h2-console/**")
+                        .ignoringRequestMatchers("/h2-console/**" ,"/simplerp/api/**")
                 )
                 .headers(headers -> headers
                         .frameOptions(frame -> frame.sameOrigin())
