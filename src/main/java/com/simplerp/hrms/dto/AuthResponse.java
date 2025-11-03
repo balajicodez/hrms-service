@@ -1,4 +1,4 @@
-package com.simplerp.hrms.web.dto;
+package com.simplerp.hrms.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
