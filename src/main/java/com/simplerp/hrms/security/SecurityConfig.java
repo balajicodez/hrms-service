@@ -45,7 +45,14 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())              // disable CSRF for simplicity
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()          // allow all requests
+                        .anyRequest().permitAll()
+                        
+                )
+                .csrf(csrf -> csrf
+                        .ignoringRequestMatchers("/h2-console/**")
+                )
+                .headers(headers -> headers
+                        .frameOptions(frame -> frame.sameOrigin())
                 )
                 .formLogin(form -> form.disable())         // disable login form
                 .httpBasic(basic -> basic.disable());      // disable basic auth
