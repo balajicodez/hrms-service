@@ -1,4 +1,4 @@
-package com.simplerp.hrms.controller;
+package com.simplerp.hrms.web;
 
 import com.simplerp.hrms.model.Permission;
 import com.simplerp.hrms.model.Role;
@@ -7,9 +7,9 @@ import com.simplerp.hrms.repository.PermissionRepository;
 import com.simplerp.hrms.repository.RoleRepository;
 import com.simplerp.hrms.repository.UserRepository;
 import com.simplerp.hrms.security.JwtUtil;
-import com.simplerp.hrms.dto.AuthRequest;
-import com.simplerp.hrms.dto.AuthResponse;
-import com.simplerp.hrms.dto.RegisterRequest;
+import com.simplerp.hrms.web.dto.AuthRequest;
+import com.simplerp.hrms.web.dto.AuthResponse;
+import com.simplerp.hrms.web.dto.RegisterRequest;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
