@@ -49,6 +49,9 @@ public class PettyCashDayClosing {
 
     private Long cashOut;
 
+    private Long organizationId;
+    private String organizationName;
+
 }
 
 

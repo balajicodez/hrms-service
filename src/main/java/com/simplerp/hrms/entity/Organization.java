@@ -37,19 +37,6 @@ public class Organization {
     private String website;            // Organization website
     private String status;             // Active / Inactive
 
-    /**
-     * Address details stored as JSON in DB.
-     * Example:
-     * {
-     * "address1": "123 Street",
-     * "address2": "Suite 45",
-     * "addressType": "Permanent",
-     * "pinZip": "500001",
-     * "city": "Hyderabad",
-     * "region": "Telangana",
-     * "country": "India"
-     * }
-     */
     @Lob
     @Convert(converter = JpaJsonConverter.class)
     @Column(columnDefinition = "TEXT") // for H2; PostgreSQL will still accept this

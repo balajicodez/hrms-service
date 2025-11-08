@@ -2,7 +2,6 @@ package com.simplerp.hrms.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.sql.Date;
 
 @Entity
@@ -33,9 +32,9 @@ public class Expense {
 
     private String expenseSubType;
 
-    private String branch;
+    private String organizationName;
 
-    private Long branchId;
+    private Long organizationId;
 
     // Binary image data (stored as BLOB)
     @Lob
