@@ -52,3 +52,7 @@ VALUES
 (1, 'EMP002', 'Priya', 'Sharma', NULL, '{"designation":"Worker","region":"Delhi"}', 1, 3),
 (2, 'EMP003', 'Arjun', 'Patel', 'Kumar', '{"designation":"Worker","region":"Gujarat"}', 2, 4),
 (2, 'EMP004', 'Meena', 'Das', NULL, '{"designation":"Worker","region":"Kolkata"}', 1, 3);
+
+INSERT INTO expense_type_master (id, description,subtype, type) VALUES
+(1, 'in' , 'in', 'CASH-IN'),
+(2, 'out' , 'out', 'CASH-OUT');

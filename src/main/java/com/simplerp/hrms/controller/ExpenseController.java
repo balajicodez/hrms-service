@@ -46,12 +46,22 @@ public class ExpenseController {
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Page<Expense>> listExpenses(
             @RequestParam(value = "expenseType", required = false) String expenseType,
+            @RequestParam(value = "organizationId", required = false) Long organizationId,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size
     ) {
         if (page < 0) page = 0;
         if (size <= 0) size = 10;
-        Page<Expense> expenses = expenseRepository.findAll(PageRequest.of(page, size));
+        Page<Expense> expenses = Page.empty();
+        if (organizationId == null && expenseType == null) {
+            expenses = expenseRepository.findAll(PageRequest.of(page, size));
+        } else {
+            if (expenseType == null) {
+                expenses = expenseRepository.findByOrganizationId(organizationId, PageRequest.of(page, size));
+            } else if (organizationId == null) {
+                expenses = expenseRepository.findByExpenseType(expenseType, PageRequest.of(page, size));
+            }
+        }
         return ResponseEntity.ok(expenses);
     }
 }

@@ -1,12 +1,14 @@
 package com.simplerp.hrms.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Date;
 
 @Entity
 @Data
+@Builder
 public class PettyCashDayClosing {
 
     @Id

@@ -31,6 +31,6 @@ public class PettyCashDayClosingRequest {
     private Long tenCoinCount;
     private Long twentyCoinCount;
 
-    private Long cashIn;
-    private Long cashOut;
+    private Long openingBalance;
+    private Long closingBalance;
 }
