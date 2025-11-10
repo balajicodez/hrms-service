@@ -83,10 +83,12 @@ public class ExpenseController {
         if (organizationId == null && expenseType == null) {
             expenses = expenseRepository.findAll(PageRequest.of(page, size));
         } else {
-            if (expenseType == null) {
+            if (expenseType == null && organizationId != null) {
                 expenses = expenseRepository.findByOrganizationId(organizationId, PageRequest.of(page, size));
-            } else if (organizationId == null) {
+            } else if (organizationId == null && expenseType != null) {
                 expenses = expenseRepository.findByExpenseType(expenseType, PageRequest.of(page, size));
+            } else {
+                expenses = expenseRepository.findByExpenseTypeAndOrganizationId(expenseType, organizationId, PageRequest.of(page, size));
             }
         }
         return ResponseEntity.ok(expenses);
