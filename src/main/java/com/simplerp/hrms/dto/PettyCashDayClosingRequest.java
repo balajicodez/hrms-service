@@ -33,4 +33,7 @@ public class PettyCashDayClosingRequest {
 
     private Long openingBalance;
     private Long closingBalance;
+
+    private Long organizationId;
+
 }

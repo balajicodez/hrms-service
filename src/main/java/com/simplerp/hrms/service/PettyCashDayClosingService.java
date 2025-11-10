@@ -4,6 +4,7 @@ import com.simplerp.hrms.dto.PettyCashDayClosingRequest;
 import com.simplerp.hrms.entity.PettyCashDayClosing;
 import com.simplerp.hrms.exception.PettyCashDayClosingAlreadyDoneException;
 import com.simplerp.hrms.exception.PettyCashDayClosingBalanceException;
+import com.simplerp.hrms.repository.ExpenseRepository;
 import com.simplerp.hrms.repository.PettyCashDayClosingRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,11 @@ public class PettyCashDayClosingService {
 
     private final PettyCashDayClosingRepository repository;
 
-    public PettyCashDayClosingService(PettyCashDayClosingRepository repository) {
+    private final ExpenseRepository expenseRepository;
+
+    public PettyCashDayClosingService(PettyCashDayClosingRepository repository, ExpenseRepository expenseRepository) {
         this.repository = repository;
+        this.expenseRepository = expenseRepository;
     }
 
     public PettyCashDayClosing createFromExpenses(PettyCashDayClosingRequest request) {
@@ -72,6 +76,8 @@ public class PettyCashDayClosingService {
                 .description(request.getDescription())
                 .cashIn(cashIn)
                 .cashOut(cashOut)
+                .startingBalance(expenseRepository.sumAmountByExpenseTypeAndCreatedDateAndOrganizationId("CASH-IN",
+                        request.getClosingDate(), request.getOrganizationId()))
                 .build();
 
         // Try to insert a row using a single native INSERT ... SELECT that aggregates sums from Expense
