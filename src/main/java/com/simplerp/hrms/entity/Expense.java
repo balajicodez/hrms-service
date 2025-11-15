@@ -36,7 +36,8 @@ public class Expense {
 
     private Long organizationId;
 
-    // Binary image data (stored as BLOB)
+    private String branchName;
+
     @Lob
     @Basic(fetch = FetchType.LAZY)
     @Column(name = "image_data", columnDefinition = "BLOB")

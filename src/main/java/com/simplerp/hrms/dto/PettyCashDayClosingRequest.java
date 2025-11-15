@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class PettyCashDayClosingRequest {
+public class  PettyCashDayClosingRequest {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private java.sql.Date closingDate;
     private Long createdUserId;
@@ -31,7 +31,8 @@ public class PettyCashDayClosingRequest {
     private Long tenCoinCount;
     private Long twentyCoinCount;
 
-    private Long openingBalance;
+    private Long cashIn;
+    private Long cashOut;
     private Long closingBalance;
 
     private Long organizationId;

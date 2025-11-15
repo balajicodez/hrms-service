@@ -14,7 +14,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: update       # use 'create' for a fresh schema each run
+      ddl-auto: create       # use 'create' for a fresh schema each run
     show-sql: false
     defer-datasource-initialization: true
     properties:

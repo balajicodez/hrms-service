@@ -55,7 +55,7 @@ public class PettyCashDayClosingController {
 
 
         PettyCashDayClosing closing = PettyCashDayClosing.builder().cashIn(openingBalance)
-                .cashOut(openingBalance - totalCashOut).build();
+                .cashOut(totalCashOut).closingBalance(openingBalance-totalCashOut).build();
 
         return ResponseEntity.ok(closing);
     }

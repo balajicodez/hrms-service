@@ -47,7 +47,7 @@ public class PettyCashDayClosingService {
                 safe(request.getHundredSoiledNoteCount()) * 100 +
                 safe(request.getFiveHundredSoiledNoteCount()) * 500;
 
-        if (cashIn != (request.getOpeningBalance() - request.getClosingBalance())) {
+        if (cashIn != (request.getClosingBalance())) {
             throw new PettyCashDayClosingBalanceException("Calculated closing balance does not match the provided Denominations");
         }
 
@@ -74,10 +74,9 @@ public class PettyCashDayClosingService {
                 ._200SoiledNoteCount(request.getTwoHundredSoiledNoteCount())
                 ._500SoiledNoteCount(request.getFiveHundredSoiledNoteCount())
                 .description(request.getDescription())
-                .cashIn(cashIn)
-                .cashOut(cashOut)
-                .startingBalance(expenseRepository.sumAmountByExpenseTypeAndCreatedDateAndOrganizationId("CASH-IN",
-                        request.getClosingDate(), request.getOrganizationId()))
+                .cashIn(request.getCashIn())
+                .cashOut(request.getCashOut())
+                .closingBalance(request.getClosingBalance())
                 .build();
 
         // Try to insert a row using a single native INSERT ... SELECT that aggregates sums from Expense

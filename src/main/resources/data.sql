@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS employee (
 --  DATA SEEDING
 -- =========================================================
 
-INSERT INTO organization (id, name) VALUES
-(1, 'DivyaSree Pvt Ltd, Gulzar House'),
-(2, 'DivyaSree Pvt Ltd, Ameerpet');
+INSERT INTO organization (id, name,parent_organization_id) VALUES
+(1000, 'DivyaSree Pvt Ltd, Gulzar House',null),
+(1001, 'DivyaSree Pvt Ltd, Ameerpet',1000);
 
 INSERT INTO master_entity (id, name) VALUES
 (1, 'Full-time'),
@@ -48,10 +48,10 @@ INSERT INTO master_entity (id, name) VALUES
 
 INSERT INTO employee (organization_id, employee_no, first_name, last_name, middle_name, other_info, employment_type_id, status_id)
 VALUES
-(1, 'EMP001', 'Rakesh', 'Bhattacharya', NULL, '{"designation":"Supervisor","region":"Dhaka"}', 1, 3),
-(1, 'EMP002', 'Priya', 'Sharma', NULL, '{"designation":"Worker","region":"Delhi"}', 1, 3),
-(2, 'EMP003', 'Arjun', 'Patel', 'Kumar', '{"designation":"Worker","region":"Gujarat"}', 2, 4),
-(2, 'EMP004', 'Meena', 'Das', NULL, '{"designation":"Worker","region":"Kolkata"}', 1, 3);
+(1001, 'EMP001', 'Rakesh', 'Bhattacharya', NULL, '{"designation":"Supervisor","region":"Dhaka"}', 1, 3),
+(1001, 'EMP002', 'Priya', 'Sharma', NULL, '{"designation":"Worker","region":"Delhi"}', 1, 3),
+(1001, 'EMP003', 'Arjun', 'Patel', 'Kumar', '{"designation":"Worker","region":"Gujarat"}', 2, 4),
+(1001, 'EMP004', 'Meena', 'Das', NULL, '{"designation":"Worker","region":"Kolkata"}', 1, 3);
 
 INSERT INTO expense_type_master (id, description,subtype, type) VALUES
 (1, 'in' , 'in', 'CASH-IN'),

@@ -30,7 +30,7 @@ public class PettyCashDayClosing {
 
     private Date createdTime;
 
-    private Long startingBalance;
+    private String comments;
 
     private Long closingBalance;
 

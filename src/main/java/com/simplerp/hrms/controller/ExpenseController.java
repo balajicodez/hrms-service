@@ -1,4 +1,4 @@
-package com.simplerp.hrms.controller;
+    package com.simplerp.hrms.controller;
 
 import com.simplerp.hrms.entity.Expense;
 import com.simplerp.hrms.entity.PettyCashDayClosing;
@@ -21,6 +21,7 @@ import java.util.Optional;
 @AllArgsConstructor
 @RequestMapping("/simplerp/api/expenses")
 public class ExpenseController {
+
 
     private final ExpenseRepository expenseRepository;
 
